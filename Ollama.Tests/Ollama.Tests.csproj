@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ollama.Domain\Ollama.Domain.csproj" />
+    <ProjectReference Include="..\Ollama.Infrastructure\Ollama.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
