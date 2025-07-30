@@ -1,5 +1,5 @@
 ﻿using Ollama.Domain.Entities;
-using Ollama.Infrastructure.Exceptions;
+using Ollama.Domain.Exceptions;
 using Ollama.Infrastructure.Repositories;
 using Xunit;
 
@@ -13,6 +13,7 @@ public class UserInMemoryRepositoryTest
     {
         _repository = new UserInMemoryRepository();
     }
+
     [Fact]
     public void UserInMemoryRepository_Should_Save_User_Successfully()
     {
@@ -20,28 +21,29 @@ public class UserInMemoryRepositoryTest
 
         _repository.SaveUser(user);
 
-        Assert.Equal(user.Id, _repository.GetUserById(user.Id)!.Id);
+        Assert.Equal(user.Id, _repository.GetUser()!.Id);
     }
 
     [Fact]
-    public void UserInMemoryRepository_Should_Throw_When_Id_Already_Exists()
+    public void UserInMemoryRepository_Should_Throw_When_An_User_Already_Exists()
     {
         var user = new User("Gabriel");
 
         _repository.SaveUser(user);
 
-        var exception = Assert.Throws<DupicateUserIdException>(() => { _repository.SaveUser(user); });
+        var exception = Assert.Throws<DupicateUserException>(() => { _repository.SaveUser(user); });
 
-        Assert.Equal("User with the same Id already exists.", exception.Message);
+        Assert.Equal("User already exists.", exception.Message);
     }
 
     [Fact]
-    public void UserInMemoryRepository_Should_Return_User_By_Name_Successfully()
+    public void UserInMemoryRepository_Should_Return_Successfully()
     {
         var user = new User("Gabriel");
 
         _repository.SaveUser(user);
-        var fetchedUser = _repository.GetUserByName("gabriel");
+
+        var fetchedUser = _repository.GetUser();
 
         Assert.NotNull(fetchedUser);
         Assert.Equal(user.Id, fetchedUser.Id);
@@ -51,10 +53,8 @@ public class UserInMemoryRepositoryTest
     [Fact]
     public void UserInMemoryRepository_Should_Return_Null_If_User_Does_Not_Exists()
     {
-        var user1 = _repository.GetUserById(Guid.NewGuid());
-        var user2 = _repository.GetUserByName("michael scott");
+        var user = _repository.GetUser();
 
-        Assert.Null(user1);
-        Assert.Null(user2);
+        Assert.Null(user);
     }
 }

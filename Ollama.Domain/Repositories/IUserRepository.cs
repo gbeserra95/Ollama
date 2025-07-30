@@ -4,7 +4,6 @@ namespace Ollama.Domain.Repositories;
 
 public interface IUserRepository
 {
-    User? GetUserById(Guid id);
-    User? GetUserByName(string name);
+    User? GetUser();
     void SaveUser(User user);
 }

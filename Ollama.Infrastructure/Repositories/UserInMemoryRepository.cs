@@ -1,28 +1,23 @@
 ﻿using Ollama.Domain.Entities;
 using Ollama.Domain.Repositories;
-using Ollama.Infrastructure.Exceptions;
+using Ollama.Domain.Exceptions;
 
 namespace Ollama.Infrastructure.Repositories;
 
 public class UserInMemoryRepository : IUserRepository
 {
-    private readonly List<User> _users = [];
+    private User? _user;
 
-    public User? GetUserById(Guid id)
+    public User? GetUser()
     {
-        return _users.FirstOrDefault(u => u.Id == id);
-    }
-
-    public User? GetUserByName(string name)
-    {
-        return _users.FirstOrDefault(u => u.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        return _user;
     }
 
     public void SaveUser(User user)
     {
-        if (_users.Any(u => u.Id == user.Id))
-            throw new DupicateUserIdException("User with the same Id already exists.");
-            
-        _users.Add(user);
+        if (_user is not null)
+            throw new DupicateUserException("User already exists.");
+
+        _user = user;
     }
 }
