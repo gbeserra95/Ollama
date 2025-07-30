@@ -17,11 +17,6 @@ public class Chat : IChat
         _userRepository = userRepository;
     }
 
-    public void GetUserPrompt()
-    {
-        throw new NotImplementedException();
-    }
-
     public void GreetUser()
     {
         var user = _userRepository.GetUser();
@@ -35,9 +30,14 @@ public class Chat : IChat
         Console.WriteLine($"Welcome back, {user!.Name}! How can I help you today?");
     }
 
-    public void ResponseUser()
+    public async Task GetUserPrompt(string prompt)
     {
-        throw new NotImplementedException();
+        await foreach (var text in _ollamaService.AskOllamaStreamingAsync(prompt))
+        {
+            Console.Write(text);
+        }
+
+        Console.WriteLine();
     }
 
     private void AskUserName()
@@ -67,7 +67,7 @@ public class Chat : IChat
             {
                 Console.WriteLine(ex.Message);
             }
-            
+
             Console.WriteLine("Please, tell me your name: ");
         }
     }
