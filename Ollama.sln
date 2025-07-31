@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ollama.Infrastructure", "Ol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ollama.Application", "Ollama.Application\Ollama.Application.csproj", "{74E9F839-199A-4D70-ADAA-6FDC733954E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ollama.UI", "Ollama.UI\Ollama.UI.csproj", "{D633CDE6-847B-417E-B167-29D3B0CF31CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{74E9F839-199A-4D70-ADAA-6FDC733954E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74E9F839-199A-4D70-ADAA-6FDC733954E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74E9F839-199A-4D70-ADAA-6FDC733954E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D633CDE6-847B-417E-B167-29D3B0CF31CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D633CDE6-847B-417E-B167-29D3B0CF31CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D633CDE6-847B-417E-B167-29D3B0CF31CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D633CDE6-847B-417E-B167-29D3B0CF31CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

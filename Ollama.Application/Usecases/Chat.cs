@@ -30,14 +30,18 @@ public class Chat : IChat
         Console.WriteLine($"Welcome back, {user!.Name}! How can I help you today?");
     }
 
-    public async Task GetUserPrompt(string prompt)
+    public async Task GetUserPrompt(string? prompt)
     {
+        if (string.IsNullOrWhiteSpace(prompt))
+        {
+            Console.WriteLine("Please, type something so we can chat...");
+            return;
+        }
+
         await foreach (var text in _ollamaService.AskOllamaStreamingAsync(prompt))
         {
             Console.Write(text);
         }
-
-        Console.WriteLine();
     }
 
     private void AskUserName()

@@ -4,5 +4,5 @@ public interface IChat
 {
     void GreetUser();
 
-    Task GetUserPrompt(string prompt);
+    Task GetUserPrompt(string? prompt);
 }
